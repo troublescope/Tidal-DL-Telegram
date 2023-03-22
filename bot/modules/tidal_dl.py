@@ -8,7 +8,7 @@ from bot.helpers.utils.check_link import check_link
 from bot.helpers.tidal_func.events import checkLogin, start
 from bot.helpers.database.postgres_impl import user_settings
 
-@Client.on_message(filters.regex(r'\b(http|https)://(?:.*\.)?tidal\.com/(?:[a-z]{2}-[A-Z]{2}/)?(?:track|album)/\d+\b'))
+@Client.on_message(filters.regex(r'\b(https?://)?(.*\.)?tidal\.com/(?:[a-z]{2}-[A-Z]{2}/)?(track|album|playlist)/\w+\b'))
 async def download_tidal(bot, update):
     if await check_id(message=update):
         try:
