@@ -73,7 +73,7 @@ async def check_post_tg(title):
         LOGGER.info("No User Session Provided. Skipping Duplicate Check...")
         return False
 
-async def check_duplicate(title, artist, track_id, bot, c_id, r_id, etype=None):
+async def check_duplicate(title, artist, track_id, bot, c_id, r_id, etype=None, force_download=False):
     try:
         if etype == Type.Album:
             msg_link = await check_file_exist_db(bot, title, artist, track_id, "album", True)
@@ -91,6 +91,6 @@ async def check_duplicate(title, artist, track_id, bot, c_id, r_id, etype=None):
                 reply_markup=InlineKeyboardMarkup(inline_keyboard)
             )
             LOGGER.info(title + " already exist")
-            return True
+            return False if force_download else True
     except Exception as e:
         LOGGER.warning(e)

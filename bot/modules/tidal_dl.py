@@ -16,7 +16,7 @@ async def download_tidal(bot, update):
                 link = update.reply_to_message.text
                 reply_to_id = update.reply_to_message.id
             else:
-                link = update.text # or update.text.split(" ", maxsplit=1)[1]
+                link = update.text or update.reply_to_message.text # or update.text.split(" ", maxsplit=1)[1]
                 reply_to_id = update.id
             if Config.ALLOW_OTHER_LINKS == "True":
                 link = await check_link(link)
